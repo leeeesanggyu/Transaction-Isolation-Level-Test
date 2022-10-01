@@ -18,7 +18,6 @@ public class MemberTest {
 
     @Autowired
     MemberRepository memberRepository;
-
     @Autowired
     MemberService memberService;
 
