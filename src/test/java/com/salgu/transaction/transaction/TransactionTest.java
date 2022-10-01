@@ -3,11 +3,11 @@ package com.salgu.transaction.transaction;
 import com.salgu.transaction.member.entity.Member;
 import com.salgu.transaction.member.repository.MemberRepository;
 import com.salgu.transaction.member.service.MemberService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -32,7 +32,8 @@ public class TransactionTest {
     }
 
     @Test
-    void changeWaitName() throws ExecutionException, InterruptedException {
+    @DisplayName("READ UNCOMMITTED 테스트")
+    void changeNameWaitDirtyReadTest() throws ExecutionException, InterruptedException {
         final Member member = memberService.saveMember(name);
         assertThat(member.getName()).isEqualTo(name);
 

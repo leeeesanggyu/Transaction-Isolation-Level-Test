@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 import static com.salgu.transaction.utils.ThreadService.threadSleep;
 
 @Slf4j
@@ -46,13 +44,13 @@ public class MemberService {
     }
 
     /**
-     * 이름을 변경하는데 10초가 걸리고
+     * 이름을 변경하는데 n초가 걸리고
      * 변경되는 과정에선 temp 란 임시 이름으로 존재합니다.
      */
     @Transactional
     public Member changeWaitName(Long id, String newName) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
         member.setName("temp");
         memberRepository.flush();
 
